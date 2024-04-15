@@ -1,13 +1,14 @@
-using MooPing.Client.Pages;
 using MooPing.Components;
 
 var builder = WebApplication.CreateBuilder(args);
-
+#region Services
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -4,9 +4,12 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>f183c4a2-4a87-43fc-ac71-bc58838b5d37</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\MooPing.Database\MooPing.Database.csproj" />
+		<ProjectReference Include="..\..\MooPing.Shared\MooPing.Shared.csproj" />
 		<ProjectReference Include="..\MooPing.Client\MooPing.Client.csproj" />
 	</ItemGroup>
 
