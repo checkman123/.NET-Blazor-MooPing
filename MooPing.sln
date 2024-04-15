@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing", "MooPing\MooPing\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing.Client", "MooPing\MooPing.Client\MooPing.Client.csproj", "{527EA690-767B-43F6-9380-A7EE47821A2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing.Database", "MooPing.Database\MooPing.Database.csproj", "{407A456B-B1E1-45C1-84EB-493BB6DF27BA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing.Shared", "MooPing.Shared\MooPing.Shared.csproj", "{5236EFB4-7A3C-4944-9B38-BC6A0E94082A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{527EA690-767B-43F6-9380-A7EE47821A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{527EA690-767B-43F6-9380-A7EE47821A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{527EA690-767B-43F6-9380-A7EE47821A2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{407A456B-B1E1-45C1-84EB-493BB6DF27BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{407A456B-B1E1-45C1-84EB-493BB6DF27BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{407A456B-B1E1-45C1-84EB-493BB6DF27BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{407A456B-B1E1-45C1-84EB-493BB6DF27BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5236EFB4-7A3C-4944-9B38-BC6A0E94082A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5236EFB4-7A3C-4944-9B38-BC6A0E94082A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5236EFB4-7A3C-4944-9B38-BC6A0E94082A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5236EFB4-7A3C-4944-9B38-BC6A0E94082A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
