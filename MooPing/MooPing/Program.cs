@@ -5,16 +5,12 @@ using MooPing.AuthenticationStateSyncer;
 using NpgsqlTypes;
 using Serilog.Sinks.PostgreSQL.ColumnWriters;
 using Serilog.Sinks.PostgreSQL;
-using Serilog.Extensions.Logging;
 using Serilog;
 using MooPing.Components;
 using Serilog.Events;
 using Serilog.Filters;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using MooPing.Database;
-using MooPing.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Services
