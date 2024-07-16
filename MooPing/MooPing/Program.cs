@@ -30,10 +30,10 @@ builder.Services.AddWebOptimizer(pipeline =>
     pipeline.MinifyJsFiles("js/**/*.js", "js/**/*.js");
 });
 
-/*//Database
+//Database
 builder.Services.AddDbContext<MooPingDbContext>(options =>
             options.UseNpgsql(builder.Configuration["SupabaseConnectionString"]));
-*/
+
 //Auth0
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
@@ -44,7 +44,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAu
 
 // Configure serilog logging
 //Connection string is from Secret Manager. (Right-click on project and select "Manage User Secrets")
-/*var logConnectionString = builder.Configuration["SupabaseConnectionString"];
+var logConnectionString = builder.Configuration["SupabaseConnectionString"];
 
 if (!string.IsNullOrEmpty(logConnectionString))
 {
@@ -77,7 +77,7 @@ if (!string.IsNullOrEmpty(logConnectionString))
     {
         loggingBuilder.AddSerilog(logger);
     });
-}*/
+}
 #endregion
 
 #region Auth0 Login
