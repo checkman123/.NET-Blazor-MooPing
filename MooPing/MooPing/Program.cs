@@ -1,5 +1,14 @@
 using Carter;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
 using MooPing.Components;
+using MooPing.Database;
+using NpgsqlTypes;
+using Serilog.Sinks.PostgreSQL.ColumnWriters;
+using Serilog.Sinks.PostgreSQL;
+using Serilog;
+using Serilog.Filters;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Services
@@ -18,6 +27,56 @@ builder.Services.AddWebOptimizer(pipeline =>
     pipeline.MinifyJsFiles("js/**/*.js", "js/**/*.js");
 });
 #endregion
+
+
+
+
+#region Database and Logging
+
+//Database
+builder.Services.AddDbContext<MooPingDbContext>(options =>
+            options.UseNpgsql(builder.Configuration["SupabaseConnectionString"]));
+
+// Configure serilog logging
+//Connection string is from Secret Manager. (Right-click on project and select "Manage User Secrets")
+var logConnectionString = builder.Configuration["SupabaseConnectionString"];
+
+if (!string.IsNullOrEmpty(logConnectionString))
+{
+    IDictionary<string, ColumnWriterBase> columnOptions = new Dictionary<string, ColumnWriterBase>
+        {
+            { "message", new RenderedMessageColumnWriter(NpgsqlDbType.Text) },
+            { "message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text) },
+            { "level", new LevelColumnWriter(true, NpgsqlDbType.Varchar) },
+            { "raise_date", new TimestampColumnWriter(NpgsqlDbType.TimestampTz) },
+            { "exception", new ExceptionColumnWriter(NpgsqlDbType.Text) },
+            { "properties", new LogEventSerializedColumnWriter(NpgsqlDbType.Jsonb) },
+            { "props_test", new PropertiesColumnWriter(NpgsqlDbType.Jsonb) },
+            { "machine_name", new SinglePropertyColumnWriter("MachineName", PropertyWriteMethod.ToString, NpgsqlDbType.Text, "l") }
+        };
+
+    var loggerConfiguration = new LoggerConfiguration().Filter.ByExcluding(le => Matching.FromSource("Microsoft").Invoke(le)
+                         && (le.Level == LogEventLevel.Verbose
+                         || le.Level == LogEventLevel.Debug
+                         || le.Level == LogEventLevel.Information))
+                    .WriteTo.PostgreSQL(
+                                connectionString: logConnectionString,
+                                columnOptions: columnOptions,
+                                needAutoCreateTable: true,
+                                tableName: "Serilog"
+                                ).WriteTo.Console().Enrich.FromLogContext();
+
+    var logger = loggerConfiguration.CreateLogger();
+
+    builder.Services.AddLogging(loggingBuilder =>
+    {
+        loggingBuilder.AddSerilog(logger);
+    });
+
+    logger.Information("Working Serilog");
+}
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
